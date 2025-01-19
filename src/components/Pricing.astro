@@ -1,0 +1,137 @@
+<div class="p-8 sm:p-12">
+  <div class="w-full flex items-center justify-between">
+    <span
+      class="text-neutral-grayish-blue uppercase font-bold tracking-wider"
+      id="pageviews"
+    >
+      100k Pageviews
+    </span>
+    <span id="typeBilling" class="text-neutral-grayish-blue">
+      <span
+        class="text-xl sm:text-3xl text-neutral-dark-desaturated-blue font-extrabold"
+        id="price"
+      >
+        $16.00
+      </span>
+      /month
+    </span>
+  </div>
+  <div class="flex flex-col space-y-4 w-full mt-8">
+    <label for="pricing" class="w-full">
+      <input
+        type="range"
+        id="pricing"
+        class="w-full appearance-none h-2 bg-neutral-light-grayish-blue rounded-full outline-none cursor-pointer"
+        step="1"
+        min="0"
+        max="4"
+      />
+    </label>
+
+    <div class="flex items-center justify-center space-x-4 mt-4">
+      <span class="font-global text-sm text-neutral-grayish-blue font-semibold">
+        Monthly Billing
+      </span>
+      <label
+        for="togglePricing"
+        class="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-green-500"
+      >
+        <input type="checkbox" id="togglePricing" class="sr-only peer" />
+
+        <span
+          class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-white transition-all peer-checked:start-6"
+        ></span>
+      </label>
+      <div class="flex space-x-2">
+        <span
+          class="font-global text-sm text-neutral-grayish-blue font-semibold"
+        >
+          Year Billing
+        </span>
+        <span
+          class="whitespace-nowrap rounded-full bg-primary-light-grayish-red px-2.5 py-0.5 text-[10px] font-bold text-primary-light-red"
+          id="discount"
+        >
+          25% discount
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background: #31d4b8;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: #31d4b8;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  input[type="range"]:hover::-moz-range-thumb {
+    transform: scale(1.2);
+  }
+</style>
+
+<script>
+  const pricingData = [
+    { pageviews: "10K", price: 8 },
+    { pageviews: "50K", price: 12 },
+    { pageviews: "100K", price: 16 },
+    { pageviews: "500K", price: 24 },
+    { pageviews: "1M", price: 36 },
+  ];
+
+  const pricingSlider = document.getElementById("pricing") as HTMLInputElement;
+  const pageViews = document.getElementById("pageviews");
+  const price = document.getElementById("price");
+  const togglePricing = document.getElementById(
+    "togglePricing"
+  ) as HTMLInputElement;
+  const typeBilling = document.getElementById("typeBilling");
+
+  pricingSlider?.addEventListener("input", () => {
+    const isAnnual = togglePricing.checked;
+    const value = parseInt(pricingSlider.value, 10);
+    const data = pricingData[value];
+    if (pageViews) {
+      pageViews.textContent = `${data.pageviews} Pageviews`;
+    }
+    if (price) {
+      const finalPrice = isAnnual ? data.price * 0.75 : data.price;
+      price.textContent = `$${finalPrice.toFixed(2)}`;
+    }
+  });
+
+  const actualWidth = document.documentElement.clientWidth;
+  if (actualWidth >= 320 && actualWidth <= 640) {
+    const discountElement = document.getElementById("discount");
+    if (discountElement) {
+      discountElement.textContent = "-25%";
+    }
+  } else {
+    const discountElement = document.getElementById("discount");
+    if (discountElement) {
+      discountElement.textContent = "25% discount";
+    }
+  }
+</script>

@@ -21,6 +21,9 @@ export default {
 			},
 			fontFamily: {
 				'global': ['Manrope']
+			},
+			backgroundImage: {
+				'circles-pattern': 'url("/src/assets/pattern-circles.svg")'
 			}
 		},
 	},

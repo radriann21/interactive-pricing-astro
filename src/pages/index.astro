@@ -1,9 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import PricingComponent from "../components/PricingComponent.astro";
 ---
 
 <Layout>
-  <main class="max-w-full min-h-screen">
-    <h1 class="font-global text-primary-light-red text-3xl">Hello World</h1>
+  <main
+    class="relative max-w-full min-h-screen bg-neutral-very-pale-blue font-global flex flex-col items-center justify-center"
+  >
+    <div
+      class="h-[380px] w-full bg-neutral-light-grayish-blue rounded-bl-[62px] absolute top-0 left-0 z-0"
+    >
+    </div>
+    <Hero />
+    <PricingComponent />
   </main>
 </Layout>
